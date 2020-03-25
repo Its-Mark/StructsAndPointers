@@ -5,6 +5,7 @@
 
 #include "myDate.h"
 #include <iostream>
+#include <iomanip>
 using namespace std;
 
 
@@ -27,6 +28,7 @@ void sortHTown(Student *[]);
 
 int main() {
 	Student *s1[10];
+	populate(s1);
 	int choice = 0;
 	while (choice != 6) {
 		//display menu
@@ -39,7 +41,29 @@ int main() {
 		//takes input
 		cin >> choice;
 		if (choice == 1) {
-	
+			cout << "Sorted by Name..." << endl;
+			sortName(s1);
+			display(s1);
+		}
+		else if (choice == 2) {
+			cout << "Sorted by Student ID..." << endl;
+			sortSID(s1);
+			display(s1);
+		}
+		else if (choice == 3) {
+			cout << "Sorted by Grade..." << endl;
+			sortGrade(s1);
+			display(s1);
+		}
+		else if (choice == 4) {
+			cout << "Sorted by Birthday..." << endl;
+			sortBirthday(s1);
+			display(s1);
+		}
+		else if (choice == 5) {
+			cout << "Sorted by Home Town..." << endl;
+			sortHTown(s1);
+			display(s1);
 		}
 
 	}
@@ -49,9 +73,9 @@ int main() {
 
 //populate the array with students
 void populate(Student *s[]) {
-	string names[10] = {"Steve", "Jeremy", "Calvin", "Mark", "Michael", "Josie", "Linda", "Maddison", "Tyler", "Wendy"};
-	char grades[5] = { 'A','B','C','D','F' };
-	string cities[10] = {"Downey", "Long Beach", "Compton", "Carson", "Dalas", "Bronx", "Queens", "Brooklyn", "Harlem", "Detroit"};
+	string names[] = {"Steve", "Jeremy", "Calvin", "Mark", "Michael", "Josie", "Linda", "Maddison", "Tyler", "Wendy"};
+	char grades[] = { 'A','B','C','D','F' };
+	string cities[] = {"Downey", "Long Beach", "Compton", "Carson", "Dalas", "Bronx", "Queens", "Brooklyn", "Harlem", "Detroit"};
 	for (int i = 0; i < 10; i++) {
 		s[i] = new Student;
 		strcpy_s(s[i]->name, names[i].c_str());
@@ -79,7 +103,8 @@ void swap(Student **x, Student **y) {
 void sortName(Student *s[]) {
 	for (int i = 0; i < 10; i++) {
 		for (int j = 0; j < 9 - i; j++) {
-			if (strcmp(s[j]->name, s[j + 1]->name) > 0) {
+			int comparison = strcmp(s[j]->name, s[j + 1]->name);
+			if (comparison > 0) {
 				swap(s[j], s[j + 1]);
 			}
 		}
@@ -98,7 +123,7 @@ void sortSID(Student *s[]) {
 }
 
 //sort array by Grade
-void sortName(Student *s[]) {
+void sortGrade(Student *s[]) {
 	for (int i = 0; i < 10; i++) {
 		for (int j = 0; j < 9 - i; j++) {
 			if (s[j]->grade > s[j+1]->grade) {
@@ -137,4 +162,14 @@ void sortHTown(Student *s[]) {
 			}
 		}
 	}
+}
+
+//display the list in columns. All columns should be left-justified
+//for this one use left keyword and setw(int n)
+void display(Student* s[]) {
+	cout << setw(10) << left << "Name:" << setw(15) << left << "Student ID:" << setw(15) << left << "Grade:" << setw(20) << left << "Birthday:" << setw(20) << left << "Home Town:" << endl;
+	for (int i = 0; i < 10; i++) {
+		cout << setw(10) << left << s[i]->name << setw(15) << left << s[i]->SID << setw(15) << left << s[i]->grade << setw(20) << left << s[i]->bDay.toString() << setw(21) << left << s[i]->homeTown << endl;
+	}
+	
 }

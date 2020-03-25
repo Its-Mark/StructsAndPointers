@@ -1,7 +1,7 @@
 //Mark Garcia
 //Class (CECS 282-07)
 //Prog 3 Structs and Pointers
-//Due: March 16, 2020
+//Due: March 25, 2020
 
 #include <string>
 #ifndef MYDATE_H
