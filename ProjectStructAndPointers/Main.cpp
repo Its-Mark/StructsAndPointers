@@ -74,13 +74,15 @@ int main() {
 //populate the array with students
 void populate(Student *s[]) {
 	string names[] = {"Steve", "Jeremy", "Calvin", "Mark", "Michael", "Josie", "Linda", "Maddison", "Tyler", "Wendy"};
-	char grades[] = { 'A','B','C','D','F' };
+	//there are multiple A B C just because for some reason a lot of the students were only given D's and F's
+	//doesn't change functionality, just wanted there to be more A's B's and C's
+	char grades[] = { 'A','A','A','B','B','C','C','D','F',};
 	string cities[] = {"Downey", "Long Beach", "Compton", "Carson", "Dalas", "Bronx", "Queens", "Brooklyn", "Harlem", "Detroit"};
 	for (int i = 0; i < 10; i++) {
 		s[i] = new Student;
 		strcpy_s(s[i]->name, names[i].c_str());
 		s[i]->SID = rand() % 9000 + 1000;
-		int randGrade = rand() % 5;
+		int randGrade = rand() % 9;
 		s[i]->grade = grades[randGrade];
 		int randDay = rand() % 31 + 1;
 		int randMonth = rand() % 13;
